@@ -6,10 +6,9 @@ import 'package:time_tracker_flutter_course/services/auth.dart';
 class EmailSignInBloc {
   final AuthBase auth;
 
+  EmailSignInBloc({@required this.auth});
   final StreamController<EmailSignInModel> _modelController =
       StreamController<EmailSignInModel>();
-
-  EmailSignInBloc({@required this.auth});
 
   Stream<EmailSignInModel> get modelString => _modelController.stream;
 
