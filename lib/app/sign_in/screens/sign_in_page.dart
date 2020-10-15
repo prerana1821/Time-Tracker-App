@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/email_sign_in_page.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/sign_in_bloc.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/sign_in_button.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/social_sign_in_button.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/screens/email_sign_in_page.dart';
+import 'package:time_tracker_flutter_course/app/bloc/sign_in_bloc.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/widgets/sign_in_button.dart';
+import 'package:time_tracker_flutter_course/app/sign_in/widgets/social_sign_in_button.dart';
 import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 // import 'package:time_tracker_flutter_course/services/auth.dart';
