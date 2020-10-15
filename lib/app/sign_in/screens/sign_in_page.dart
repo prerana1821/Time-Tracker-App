@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/screens/email_sign_in_page.dart';
-import 'package:time_tracker_flutter_course/app/bloc/sign_in_bloc.dart';
+import 'package:time_tracker_flutter_course/app/bloc/sign_in_manager.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/widgets/sign_in_button.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/widgets/social_sign_in_button.dart';
 import 'package:time_tracker_flutter_course/common_widgets/platform_exception_alert_dialog.dart';
@@ -17,12 +17,12 @@ class SignInPage extends StatelessWidget {
 
   // SignInPage({@required this.auth});
 
-  final SignInBloc bloc;
+  final SignInManager manager;
   final bool isLoading;
 
   const SignInPage({
     Key key,
-    @required this.bloc,
+    @required this.manager,
     @required this.isLoading,
   }) : super(key: key);
 
@@ -31,12 +31,12 @@ class SignInPage extends StatelessWidget {
     return ChangeNotifierProvider<ValueNotifier<bool>>(
       create: (_) => ValueNotifier<bool>(false),
       child: Consumer<ValueNotifier<bool>>(
-        builder: (_, isLoading, __) => Provider<SignInBloc>(
-          create: (_) => SignInBloc(auth: auth, isLoading: isLoading),
+        builder: (_, isLoading, __) => Provider<SignInManager>(
+          create: (_) => SignInManager(auth: auth, isLoading: isLoading),
           // dispose: (context, bloc) => bloc.dispose(),
-          child: Consumer<SignInBloc>(
-            builder: (context, bloc, _) => SignInPage(
-              bloc: bloc,
+          child: Consumer<SignInManager>(
+            builder: (context, manager, _) => SignInPage(
+              manager: manager,
               isLoading: isLoading.value,
             ),
           ),
@@ -68,7 +68,7 @@ class SignInPage extends StatelessWidget {
       // final auth = Provider.of<AuthBase>(context, listen: false);
 
       // await auth.signInAnonymously();
-      await bloc.signInAnonymously();
+      await manager.signInAnonymously();
 
       // print('${authResult.user.uid}');
       // onSignIn(user);
@@ -94,7 +94,7 @@ class SignInPage extends StatelessWidget {
       // final auth = AuthProvider.of(context);
       // final auth = Provider.of<AuthBase>(context, listen: false);
       // await auth.signInWithGoogle();
-      await bloc.signInWithGoogle();
+      await manager.signInWithGoogle();
     } on PlatformException catch (e) {
       // print(e.toString());
       if (e.code != 'ERROR_ABORTED_BY_USER') {
@@ -120,7 +120,7 @@ class SignInPage extends StatelessWidget {
       // final auth = Provider.of<AuthBase>(context, listen: false);
 
       // await auth.signInWithFacebook();
-      await bloc.signInWithFacebook();
+      await manager.signInWithFacebook();
     } on PlatformException catch (e) {
       // print(e.toString());
       if (e.code != 'ERROR_ABORTED_BY_USER') {
